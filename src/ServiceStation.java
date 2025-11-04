@@ -1,22 +1,22 @@
 public class ServiceStation {
 
     class Semaphore {
-        private int value;
+        private int freePumps;
 
-        public Semaphore(int initial) {
-            value = initial;
+        public Semaphore(int value) {
+            freePumps = value;
         }
 
         public synchronized void waitFreePump() throws InterruptedException {
-            value--;
-            if (value < 0) {
+            freePumps--;
+            if (freePumps < 0) {
                 wait();
             }
         }
 
         public synchronized void notifyFreePump() throws InterruptedException {
-            value++;
-            if (value <= 0) {
+            freePumps++;
+            if (freePumps <= 0) {
                 notify();
             }
         }
